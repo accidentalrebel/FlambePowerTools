@@ -1,11 +1,13 @@
 package app;
 
+import app.scenes.CountdownTimer;
 import flambe.Entity;
 import flambe.System;
 import flambe.asset.AssetPack;
 import flambe.asset.Manifest;
 import flambe.display.FillSprite;
 import flambe.display.ImageSprite;
+import flambepowertools.managers.SceneManager;
 import flambepowertools.system.MainStage;
 
 class Main
@@ -33,5 +35,10 @@ class Main
         plane.x._ = 30;
         plane.y.animateTo(200, 6);
         System.root.addChild(new Entity().add(plane));
+		
+		var sceneManager : SceneManager = new SceneManager();
+		System.root.addChild(new Entity().add(sceneManager));
+		
+		sceneManager.switchToScene(new CountdownTimer());
     }
 }
