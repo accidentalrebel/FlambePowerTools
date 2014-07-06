@@ -7,4 +7,24 @@ class TransitionScene extends Scene
 	{
 		super(opaque);
 	}
+	
+	public function onEnterTransitionStarted()
+	{
+		
+	}
+	
+	public function onEnterTransitionFinished()
+	{
+		
+	}
+	
+	public function onExitTransitionStarted()
+	{
+		
+	}
+	
+	public function onExitTransitionFinished()
+	{
+		
+	}
 }

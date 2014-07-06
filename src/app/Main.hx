@@ -12,6 +12,8 @@ import flambepowertools.system.MainStage;
 
 class Main
 {
+	static public var sceneManager:SceneManager;
+	
     private static function main ()
     {
         // Wind up all platform-specific stuff
@@ -36,9 +38,8 @@ class Main
         plane.y.animateTo(200, 6);
         System.root.addChild(new Entity().add(plane));
 		
-		var sceneManager : SceneManager = new SceneManager();
+		sceneManager = new SceneManager();
 		System.root.addChild(new Entity().add(sceneManager));
-		
-		sceneManager.switchToScene(new CountdownTimer());
+		sceneManager.switchToScene(new CountdownTimer(), null, 5);
     }
 }

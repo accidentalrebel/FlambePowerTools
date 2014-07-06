@@ -3,12 +3,11 @@ import flambe.display.FillSprite;
 import flambe.Entity;
 import flambe.scene.FadeTransition;
 import flambe.script.CallFunction;
-import flambepowertools.managers.SceneManager;
 import flambepowertools.scene.TransitionScene;
 import flambepowertools.system.MainStage;
 import flambepowertools.utils.MiscUtils;
 
-class CountdownTimer extends TransitionScene
+class TestScene extends TransitionScene
 {
 	public function new() 
 	{
@@ -19,8 +18,7 @@ class CountdownTimer extends TransitionScene
 	{
 		super.onAdded();
 		
-		owner.addChild(new Entity().add(new FillSprite(0xFF00FF, MainStage.width, MainStage.height)));
-		MiscUtils.callWithDelay(owner, new CallFunction(goToTestScene), 5);
+		owner.addChild(new Entity().add(new FillSprite(0x00FFFF, MainStage.width, MainStage.height)));
 	}
 	
 	function goToTestScene() 
@@ -31,24 +29,24 @@ class CountdownTimer extends TransitionScene
 	override public function onEnterTransitionFinished() 
 	{
 		super.onEnterTransitionFinished();
-		trace("CountdownTimer EnterTransitionFinished");
+		trace("TestScene EnterTransitionFinished");
 	}
 	
 	override public function onEnterTransitionStarted() 
 	{
 		super.onEnterTransitionStarted();
-		trace("CountdownTimer EnterTransitionStarted");
+		trace("TestScene EnterTransitionStarted");
 	}
 	
 	override public function onExitTransitionStarted() 
 	{
 		super.onExitTransitionStarted();
-		trace("CountdownTimer ExitTransitionStarted");
+		trace("TestScene ExitTransitionStarted");
 	}
 	
 	override public function onExitTransitionFinished() 
 	{
 		super.onExitTransitionFinished();
-		trace("CountdownTimer ExitTransitionFinished");
+		trace("TestScene ExitTransitionFinished");
 	}
 }
