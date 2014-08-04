@@ -6,48 +6,47 @@ import flambe.SpeedAdjuster;
 import flambe.swf.Flipbook;
 import flambe.swf.Library;
 import flambe.swf.MoviePlayer;
+import flambepowertools.display.AnimatedSprite.AnimationSet;
 import urgame.managers.AssetManager;
 
 class AnimationSet
 {
+	public var animationSpeed (default, null):Float;
 	public var animationName (default, null): String;
 	public var frameSequence (default, null): Array<Int>;
 	
-	public function new(animationName : String, frameSequence : Array<Int>) 
+	public function new(animationName : String, frameSequence : Array<Int>, animationSpeed : Float = 1 ) 
 	{
 		this.animationName = animationName;
 		this.frameSequence = frameSequence;
+		this.animationSpeed = animationSpeed;
 	}
 }
 
 class AnimatedSprite extends Sprite
 {
-	var _animationList : Array<AnimationSet> ;
+	var _animationList : Map<String, AnimationSet> ;
 	var _flipBookArray:Array<Flipbook>;
 	var _textureArray:Array<String>;
 	var _moviePlayer:MoviePlayer;
 	var _animationSpeedAdjuster:SpeedAdjuster;
 	
 	// ============================================= PUBLIC FUNCTIONS ============================================= //
-	public function setupAnimation(animationName : String, frameArray : Array<Int>)
+	public function addAnimation(animationName : String, frameArray : Array<Int>, animationSpeed : Float = 1)
 	{
-		_animationList.push(new AnimationSet(animationName, frameArray));
+		_animationList.set(animationName, new AnimationSet(animationName, frameArray, animationSpeed));
 	}
 	
-	public function playAnimation(animationName : String, ?animationSpeed : Float)
+	public function playAnimation(animationName : String)
 	{
 		_moviePlayer.play(animationName);
-		
-		if ( animationSpeed != null )
-			updateAnimationSpeed(animationSpeed);
+		updateAnimationSpeed(animationName);
 	}
 	
-	public function loopAnimation(animationName : String, ?animationSpeed : Float)
+	public function loopAnimation(animationName : String)
 	{
 		_moviePlayer.loop(animationName);
-		
-		if ( animationSpeed != null )
-			updateAnimationSpeed(animationSpeed);		
+		updateAnimationSpeed(animationName);
 	}
 	
 	// ============================================= MAIN ============================================= //
@@ -56,7 +55,7 @@ class AnimatedSprite extends Sprite
 		super();		
 		
 		_textureArray = textureArray;
-		_animationList = new Array<AnimationSet>();
+		_animationList = new Map<String, AnimationSet>();
 	}
 	
 	override public function onAdded() 
@@ -88,22 +87,17 @@ class AnimatedSprite extends Sprite
 	}
 	
 	function setupMoviePlayer() 
-	{
-		trace("FLIPBOOK ARRAY IS " + _flipBookArray);
-		
+	{		
 		var lib : Library = Library.fromFlipbooks(_flipBookArray);
-		_moviePlayer = new MoviePlayer(lib);		
-		_animationSpeedAdjuster = new SpeedAdjuster(2);		
+		_moviePlayer = new MoviePlayer(lib);	
 		
-		var moviePlayerEntity : Entity = new Entity();
-		moviePlayerEntity.add(_moviePlayer);
-		moviePlayerEntity.add(_animationSpeedAdjuster);
-		owner.addChild(moviePlayerEntity);
+		owner.addChild(new Entity().add(_moviePlayer));
 	}
 	
 	// ============================================= HELPERS ============================================= //
-	function updateAnimationSpeed(animationSpeed:Float) 
+	function updateAnimationSpeed(animationName:String) 
 	{
-		_animationSpeedAdjuster.scale._ = animationSpeed;
+		var animationSet : AnimationSet = _animationList.get(animationName);		
+		_moviePlayer.movie._.speed._ = animationSet.animationSpeed;
 	}
 }
