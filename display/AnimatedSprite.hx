@@ -36,10 +36,18 @@ class AnimatedSprite extends Sprite
 	
 	public function playAnimation(animationName : String, ?animationSpeed : Float)
 	{
+		_moviePlayer.play(animationName);
+		
+		if ( animationSpeed != null )
+			updateAnimationSpeed(animationSpeed);
+	}
+	
+	public function loopAnimation(animationName : String, ?animationSpeed : Float)
+	{
 		_moviePlayer.loop(animationName);
 		
 		if ( animationSpeed != null )
-			_animationSpeedAdjuster.scale._ = animationSpeed;
+			updateAnimationSpeed(animationSpeed);		
 	}
 	
 	// ============================================= MAIN ============================================= //
@@ -68,27 +76,34 @@ class AnimatedSprite extends Sprite
 	
 	function setupAnimations() 
 	{			
-		var currentTextureArray : Array<Texture> = new Array<Texture>();
 		for ( tAnimationSet in _animationList ) {			
 			var animationSet : AnimationSet = tAnimationSet;
+			
+			var currentTextureArray : Array<Texture> = new Array<Texture>();
 			for ( frameNumber in animationSet.frameSequence )
 				currentTextureArray.push(AssetManager.mainAssetPack.getTexture(_textureArray[frameNumber]));
 				
-			trace("setting up animation for " + animationSet.animationName);
 			_flipBookArray.push(new Flipbook(animationSet.animationName, currentTextureArray));
 		}
 	}
 	
 	function setupMoviePlayer() 
 	{
-		var lib : Library = Library.fromFlipbooks(_flipBookArray);
-		_moviePlayer = new MoviePlayer(lib);
+		trace("FLIPBOOK ARRAY IS " + _flipBookArray);
 		
+		var lib : Library = Library.fromFlipbooks(_flipBookArray);
+		_moviePlayer = new MoviePlayer(lib);		
 		_animationSpeedAdjuster = new SpeedAdjuster(2);		
 		
 		var moviePlayerEntity : Entity = new Entity();
 		moviePlayerEntity.add(_moviePlayer);
 		moviePlayerEntity.add(_animationSpeedAdjuster);
 		owner.addChild(moviePlayerEntity);
+	}
+	
+	// ============================================= HELPERS ============================================= //
+	function updateAnimationSpeed(animationSpeed:Float) 
+	{
+		_animationSpeedAdjuster.scale._ = animationSpeed;
 	}
 }
