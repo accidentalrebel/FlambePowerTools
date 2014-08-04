@@ -29,24 +29,23 @@ class AnimatedSprite extends Sprite
 	var _flipBookArray:Array<Flipbook>;
 	var _textureArray:Array<String>;
 	var _moviePlayer:MoviePlayer;
-	var _animationSpeedAdjuster:SpeedAdjuster;
+	var _highestFrameCount : Int = 0;
 	
 	// ============================================= PUBLIC FUNCTIONS ============================================= //
 	public function addAnimation(animationName : String, frameArray : Array<Int>, animationSpeed : Float = 1)
 	{
 		_animationList.set(animationName, new AnimationSet(animationName, frameArray, animationSpeed));
-	}
-	
+		updateHighestFrameCount(frameArray.length);
+	}	
+		
 	public function playAnimation(animationName : String)
 	{
 		_moviePlayer.play(animationName);
-		updateAnimationSpeed(animationName);
 	}
 	
 	public function loopAnimation(animationName : String)
 	{
 		_moviePlayer.loop(animationName);
-		updateAnimationSpeed(animationName);
 	}
 	
 	// ============================================= MAIN ============================================= //
@@ -82,7 +81,9 @@ class AnimatedSprite extends Sprite
 			for ( frameNumber in animationSet.frameSequence )
 				currentTextureArray.push(AssetManager.mainAssetPack.getTexture(_textureArray[frameNumber]));
 				
-			_flipBookArray.push(new Flipbook(animationSet.animationName, currentTextureArray));
+			var newFlipBook : Flipbook = new Flipbook(animationSet.animationName, currentTextureArray);
+			newFlipBook.setDuration(animationSet.frameSequence.length / _highestFrameCount / animationSet.animationSpeed);
+			_flipBookArray.push(newFlipBook);
 		}
 	}
 	
@@ -94,10 +95,10 @@ class AnimatedSprite extends Sprite
 		owner.addChild(new Entity().add(_moviePlayer));
 	}
 	
-	// ============================================= HELPERS ============================================= //
-	function updateAnimationSpeed(animationName:String) 
+	// ============================================= HELPER ============================================= //
+	function updateHighestFrameCount(currentFrameCount:Int) 
 	{
-		var animationSet : AnimationSet = _animationList.get(animationName);		
-		_moviePlayer.movie._.speed._ = animationSet.animationSpeed;
+		if ( currentFrameCount > _highestFrameCount )
+			_highestFrameCount = currentFrameCount;
 	}
 }
