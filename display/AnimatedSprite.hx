@@ -82,7 +82,7 @@ class AnimatedSprite extends Sprite
 				currentTextureArray.push(AssetManager.mainAssetPack.getTexture(_textureArray[frameNumber]));
 				
 			var newFlipBook : Flipbook = new Flipbook(animationSet.animationName, currentTextureArray);
-			newFlipBook.setDuration(animationSet.frameSequence.length / _highestFrameCount / animationSet.animationSpeed);
+			newFlipBook.setDuration( 1 / animationSet.frameSequence.length * animationSet.animationSpeed );
 			_flipBookArray.push(newFlipBook);
 		}
 	}
