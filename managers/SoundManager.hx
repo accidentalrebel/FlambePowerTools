@@ -15,12 +15,14 @@ class SoundManager
 		_playbackMap = new Map<String, Playback>();
 	}
 	
-	static public function playAudio(audioPath:String) 
+	static public function playAudio(audioPath:String, volume : Float = 1) : Playback
 	{
-		Registry.assetPack.getSound(audioPath).play();
+		var playback : Playback = Registry.assetPack.getSound(audioPath).play();
+		playback.volume._ = volume;
+		return playback;
 	}
 	
-	static public function loopAudio(audioPath : String, restart : Bool = false)
+	static public function loopAudio(audioPath : String, restart : Bool = false, volume : Float = 1) : Playback
 	{
 		if ( restart )
 			stopAudio(audioPath);
@@ -30,9 +32,11 @@ class SoundManager
 			playback = Registry.assetPack.getSound(audioPath).loop();
 			_playbackMap.set(audioPath, playback);
 		}
-		else {
+		else
 			playback.sound.loop();
-		}
+		
+		playback.volume._ = volume;
+		return playback;
 	}
 	
 	static public function stopAudio(audioPath : String)
@@ -40,7 +44,7 @@ class SoundManager
 		var playback : Playback = _playbackMap.get(audioPath);
 		if ( playback != null ) {
 			playback.dispose();
-			_playbackMap.remove(audioPath);
+			_playbackMap.remove(audioPath);			
 		}
 	}
 }
