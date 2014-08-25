@@ -15,14 +15,27 @@ class SoundManager
 		_playbackMap = new Map<String, Playback>();
 	}
 	
-	static public function loopBGM(bgmPath : String)
+	static public function loopAudio(bgmPath : String, restart : Bool = false)
 	{
+		if ( restart )
+			stopAudio(bgmPath);
+		
 		var playback : Playback = _playbackMap.get(bgmPath);
 		if ( playback == null ) {
 			playback = Registry.assetPack.getSound(bgmPath).loop();
 			_playbackMap.set(bgmPath, playback);
 		}
-		else
+		else {
 			playback.sound.loop();
+		}
+	}
+	
+	static public function stopAudio(bgmPath : String)
+	{
+		var playback : Playback = _playbackMap.get(bgmPath);
+		if ( playback != null ) {
+			playback.dispose();
+			_playbackMap.remove(bgmPath);
+		}
 	}
 }

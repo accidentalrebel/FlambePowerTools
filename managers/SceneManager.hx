@@ -4,6 +4,10 @@ import flambe.scene.Director;
 import flambe.scene.Scene;
 import flambe.System;
 
+/**
+ * ...
+ * @author Karlo
+ */
 class SceneManager
 {
 	static private var _sceneDirector:Director;
@@ -20,5 +24,13 @@ class SceneManager
 		newEntity.add(toScene);
 		
 		_sceneDirector.unwindToScene(newEntity);
+	}
+	
+	static public function pushScene(toScene : Scene)
+	{
+		var newEntity : Entity = new Entity();
+		newEntity.add(toScene);
+		
+		_sceneDirector.pushScene(newEntity);
 	}
 }
