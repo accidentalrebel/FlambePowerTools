@@ -6,7 +6,7 @@ import game.Registry;
  * ...
  * @author Karlo
  */
-class SoundManager
+class AudioManager
 {
 	static var _playbackMap : Map<String, Playback>;
 	
