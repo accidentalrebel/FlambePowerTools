@@ -57,11 +57,13 @@ class SwipeManager extends Component
 	{
 		_startingDebugSprite = new FillSprite(0xFF0000, 10, 10);
 		_startingDebugSprite.centerAnchor();
+		_startingDebugSprite.disablePointer();
 		owner.addChild(new Entity().add(_startingDebugSprite));
 		
 		_releaseDebugSprite = new FillSprite(0x0000FF, 10, 10);
 		_releaseDebugSprite.centerAnchor();
 		_releaseDebugSprite.visible = false;
+		_releaseDebugSprite.disablePointer();
 		owner.addChild(new Entity().add(_releaseDebugSprite));
 	}
 	
@@ -114,10 +116,10 @@ class SwipeManager extends Component
 		var distanceX : Float = Math.abs(pointerDownPos.x - pointerUpPos.x);
 		var distanceY : Float = Math.abs(pointerDownPos.y - pointerUpPos.y);
 		if ( distanceY > distanceX ) {
-			if ( pointerUpPos.y > pointerUpPos.y )
+			if ( pointerUpPos.y > pointerDownPos.y )
 				_onSwipeDown.emit();
 			else
-				_onSwipeRight.emit();
+				_onSwipeUp.emit();
 		}
 		else {
 			if ( pointerUpPos.x > pointerDownPos.x )
