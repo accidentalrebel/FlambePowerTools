@@ -7,6 +7,7 @@ import flambe.input.PointerEvent;
 import flambe.math.Point;
 import flambe.System;
 import flambe.util.Signal0;
+import game.data.DebugConfig;
 import game.data.GameData;
 
 /**
@@ -46,7 +47,8 @@ class SwipeManager extends Component
 		super.onAdded();
 		
 		#if debug
-			setupDebugPoints();
+			if ( DebugConfig.SHOW_SWIPE_DEBUG_SPRITES )
+				setupDebugPoints();
 		#end
 		setupDisposer();
 		setupTouchListeners();
@@ -88,8 +90,10 @@ class SwipeManager extends Component
 		_pointerDownPos = new Point(xPos, yPos);
 		
 		#if debug
-			_startingDebugSprite.setXY(xPos, yPos);
-			_releaseDebugSprite.visible = false;
+			if ( _startingDebugSprite != null && _releaseDebugSprite != null ) {
+				_startingDebugSprite.setXY(xPos, yPos);
+				_releaseDebugSprite.visible = false;
+			}
 		#end
 	}
 	
@@ -100,13 +104,14 @@ class SwipeManager extends Component
 		
 		var pointerUpPos = new Point(xPos, yPos);
 		if ( pointerUpPos.distanceTo(_pointerDownPos.x, _pointerDownPos.y) > GameData.SWIPE_DISTANCE_REQUIREMENT ) {
-			_releaseDebugSprite.rotation.animateBy(90, 0.5);
 			handleSwipeDirectionDetection(_pointerDownPos, pointerUpPos);
 		}
 		
 		#if debug
-			_releaseDebugSprite.setXY(xPos, yPos);
-			_releaseDebugSprite.visible = true;
+			if ( _releaseDebugSprite != null ) {
+				_releaseDebugSprite.setXY(xPos, yPos);
+				_releaseDebugSprite.visible = true;
+			}
 		#end
 	}
 	
