@@ -1,5 +1,8 @@
 package flambepowertools ;
+import flambe.display.Sprite;
 import flambe.Entity;
+import flambe.math.Matrix;
+import flambe.math.Point;
 import flambe.script.CallFunction;
 import flambe.script.Delay;
 import flambe.script.Script;

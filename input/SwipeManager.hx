@@ -103,9 +103,8 @@ class SwipeManager extends Component
 		var yPos : Float = pointerEvent.viewY / MainStage.computedStageScale;
 		
 		var pointerUpPos = new Point(xPos, yPos);
-		if ( pointerUpPos.distanceTo(_pointerDownPos.x, _pointerDownPos.y) > GameData.SWIPE_DISTANCE_REQUIREMENT ) {
+		if ( pointerUpPos.distanceTo(_pointerDownPos.x, _pointerDownPos.y) > GameData.SWIPE_DISTANCE_REQUIREMENT )
 			handleSwipeDirectionDetection(_pointerDownPos, pointerUpPos);
-		}
 		
 		#if debug
 			if ( _releaseDebugSprite != null ) {
