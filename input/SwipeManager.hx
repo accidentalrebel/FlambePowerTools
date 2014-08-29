@@ -1,5 +1,6 @@
 package flambepowertools.input;
 import flambe.Component;
+import flambe.display.FillSprite;
 import flambe.Disposer;
 import flambe.Entity;
 import flambe.input.PointerEvent;
@@ -17,6 +18,8 @@ class SwipeManager extends Component
 	var _onSwipeDown : Signal0;
 	var _onSwipeLeft : Signal0;
 	var _disposer : Disposer;
+	var _startingDebugSprite:FillSprite;
+	var _releaseDebugSprite:FillSprite;
 	
 	public function new() 
 	{		
@@ -30,11 +33,26 @@ class SwipeManager extends Component
 	{
 		super.onAdded();
 		
+		#if debug
+			setupDebugPoints();
+		#end
 		setupDisposer();
 		setupTouchListeners();
-	}
+	}	
 	
 	// ============================================= SETUP ============================================= //
+	function setupDebugPoints() 
+	{
+		_startingDebugSprite = new FillSprite(0xFF0000, 10, 10);
+		_startingDebugSprite.centerAnchor();
+		owner.addChild(new Entity().add(_startingDebugSprite));
+		
+		_releaseDebugSprite = new FillSprite(0x0000FF, 10, 10);
+		_releaseDebugSprite.centerAnchor();
+		_releaseDebugSprite.visible = false;
+		owner.addChild(new Entity().add(_releaseDebugSprite));
+	}
+	
 	function setupDisposer() 
 	{
 		_disposer = new Disposer();
@@ -50,12 +68,24 @@ class SwipeManager extends Component
 	// ============================================= EVENTS ============================================= //
 	function onPointerDown(pointerEvent : PointerEvent) 
 	{
+		#if debug
+			var xPos : Float = pointerEvent.viewX / MainStage.computedStageScale;
+			var yPos : Float = pointerEvent.viewY / MainStage.computedStageScale;
 		
+			_startingDebugSprite.setXY(xPos, yPos);
+			_releaseDebugSprite.visible = false;
+		#end
 	}
 	
 	function onPointerUp(pointerEvent : PointerEvent) 
 	{
-		
+		#if debug
+			var xPos : Float = pointerEvent.viewX / MainStage.computedStageScale;
+			var yPos : Float = pointerEvent.viewY / MainStage.computedStageScale;
+			
+			_releaseDebugSprite.setXY(xPos, yPos);
+			_releaseDebugSprite.visible = true;
+		#end
 	}
 	
 	// ============================================= DISPOSAL ============================================= //
