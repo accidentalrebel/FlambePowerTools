@@ -13,12 +13,19 @@ import game.data.GameData;
  * ...
  * @author Karlo
  */
+ 
 class SwipeManager extends Component
 {
+	public var onSwipeUp(get, null) : Signal0;
+	public var onSwipeRight(get, null) : Signal0;
+	public var onSwipeDown(get, null) : Signal0;
+	public var onSwipeLeft(get, null) : Signal0;
+	
 	var _onSwipeUp : Signal0;
 	var _onSwipeRight : Signal0;
 	var _onSwipeDown : Signal0;
 	var _onSwipeLeft : Signal0;
+	
 	var _disposer : Disposer;
 	
 	var _startingDebugSprite:FillSprite;
@@ -90,13 +97,34 @@ class SwipeManager extends Component
 		var yPos : Float = pointerEvent.viewY / MainStage.computedStageScale;
 		
 		var pointerUpPos = new Point(xPos, yPos);
-		if ( pointerUpPos.distanceTo(_pointerDownPos.x, _pointerDownPos.y) > GameData.SWIPE_DISTANCE_REQUIREMENT )
+		if ( pointerUpPos.distanceTo(_pointerDownPos.x, _pointerDownPos.y) > GameData.SWIPE_DISTANCE_REQUIREMENT ) {
 			_releaseDebugSprite.rotation.animateBy(90, 0.5);
+			handleSwipeDirectionDetection(_pointerDownPos, pointerUpPos);
+		}
 		
 		#if debug
 			_releaseDebugSprite.setXY(xPos, yPos);
 			_releaseDebugSprite.visible = true;
 		#end
+	}
+	
+	// ============================================= HELPERS ============================================= //
+	function handleSwipeDirectionDetection(pointerDownPos:Point, pointerUpPos:Point)
+	{
+		var distanceX : Float = Math.abs(pointerDownPos.x - pointerUpPos.x);
+		var distanceY : Float = Math.abs(pointerDownPos.y - pointerUpPos.y);
+		if ( distanceY > distanceX ) {
+			if ( pointerUpPos.y > pointerUpPos.y )
+				_onSwipeDown.emit();
+			else
+				_onSwipeRight.emit();
+		}
+		else {
+			if ( pointerUpPos.x > pointerDownPos.x )
+				_onSwipeRight.emit();
+			else
+				_onSwipeLeft.emit();
+		}
 	}
 	
 	// ============================================= DISPOSAL ============================================= //
@@ -105,4 +133,10 @@ class SwipeManager extends Component
 		super.onRemoved();		
 		_disposer.dispose();
 	}
+	
+	// ============================================= GETTERS AND SETTERS ============================================= //
+	function get_onSwipeUp():Signal0 { return _onSwipeUp; }
+	function get_onSwipeRight():Signal0 { return _onSwipeRight; }
+	function get_onSwipeDown():Signal0 { return _onSwipeDown; }
+	function get_onSwipeLeft():Signal0 { return _onSwipeLeft; }
 }
