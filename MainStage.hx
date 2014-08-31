@@ -14,6 +14,7 @@ class MainStage
 	static public var computedStageScale(get, null) : Float;	
 	static public var width(get, null) : Float;
 	static public var height(get, null) : Float;
+	static public var mainStageSprite(get, null) : Sprite;
 
 	static private var _mainStageSprite:Sprite;
 	static private var _designSizeWidth:Float;
@@ -35,9 +36,7 @@ class MainStage
 	{
 		var xPos : Float = (positionToConvert.x - _mainStageSprite.x._) / _computedStageScale;
 		var yPos : Float = (positionToConvert.y - _mainStageSprite.y._) / _computedStageScale;
-		var convertedPosition : Point = capPositionToMainStage(new Point(xPos, yPos));
-
-		return convertedPosition;
+		return capPositionToMainStage(new Point(xPos, yPos));
 	}
 
 	// ============================================= SETUP ============================================= //
@@ -113,4 +112,5 @@ class MainStage
 	static function get_computedStageScale():Float { return _computedStageScale; }
 	static function get_width():Float { return _designSizeWidth; }
 	static function get_height():Float { return _designSizeHeight; }
+	static function get_mainStageSprite():Sprite {	return _mainStageSprite; }
 }

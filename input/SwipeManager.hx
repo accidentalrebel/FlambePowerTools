@@ -17,10 +17,12 @@ import game.data.GameData;
  
 class SwipeManager extends Component
 {
+	static public inline var REQUIRED_SWIPE_DURATION:Float = 0.5;
+	
 	public var onSwipeUp(get, null) : Signal0;
 	public var onSwipeRight(get, null) : Signal0;
 	public var onSwipeDown(get, null) : Signal0;
-	public var onSwipeLeft(get, null) : Signal0;
+	public var onSwipeLeft(get, null) : Signal0;	
 	
 	var _onSwipeUp : Signal0;
 	var _onSwipeRight : Signal0;
