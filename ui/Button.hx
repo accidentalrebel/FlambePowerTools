@@ -1,11 +1,8 @@
 package flambepowertools.ui;
-import flambe.display.FillSprite;
 import flambe.display.ImageSprite;
-import flambe.display.Sprite;
 import flambe.input.PointerEvent;
 import flambe.script.CallFunction;
 import flambe.script.Script;
-import flambe.System;
 import game.Registry;
 
 /**
