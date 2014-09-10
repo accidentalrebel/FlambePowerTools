@@ -33,4 +33,9 @@ class SceneManager
 		
 		_sceneDirector.pushScene(newEntity);
 	}
+	
+	static public function popScene() 
+	{
+		_sceneDirector.popScene();
+	}
 }

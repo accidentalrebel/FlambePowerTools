@@ -33,12 +33,17 @@ class Button extends ImageSprite
 	function setupPressListeners() 
 	{
 		this.pointerDown.connect(onPressedDown);
+		this.pointerUp.connect(onPressedUp);
 	}
 	
 	// ============================================= EVENTS ============================================= //
 	function onPressedDown(pointerEvent : PointerEvent) 
 	{
 		playOnPressedAnimation();
+	}
+	
+	function onPressedUp(pointerEvent : PointerEvent) 
+	{		
 	}
 	
 	// ============================================= ANIMATIONS ============================================= //
