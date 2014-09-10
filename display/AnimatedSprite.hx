@@ -1,4 +1,5 @@
 package flambepowertools.display;
+import flambe.asset.AssetPack;
 import flambe.display.Sprite;
 import flambe.display.Texture;
 import flambe.Entity;
@@ -7,7 +8,6 @@ import flambe.swf.Flipbook;
 import flambe.swf.Library;
 import flambepowertools.display.AnimatedSprite.AnimationSet;
 import flambepowertools.swf.MoviePlayer;
-import urgame.managers.AssetManager;
 
 class AnimationSet
 {
@@ -32,6 +32,7 @@ class AnimatedSprite extends Sprite
 	var _textureArray:Array<String>;
 	var _moviePlayer:MoviePlayer;
 	var _highestFrameCount : Int = 0;
+	var _assetPack:AssetPack;
 	
 	// ============================================= PUBLIC FUNCTIONS ============================================= //
 	public function addAnimation(animationName : String, frameArray : Array<Int>, animationSpeed : Float = 1)
@@ -56,10 +57,11 @@ class AnimatedSprite extends Sprite
 	}
 	
 	// ============================================= MAIN ============================================= //
-	public function new(textureArray : Array<String>) 
+	public function new(assetPack : AssetPack, textureArray : Array<String>) 
 	{
 		super();		
 		
+		_assetPack = assetPack;
 		_textureArray = textureArray;
 		_animationList = new Map<String, AnimationSet>();
 	}
@@ -86,7 +88,7 @@ class AnimatedSprite extends Sprite
 			
 			var currentTextureArray : Array<Texture> = new Array<Texture>();
 			for ( frameNumber in animationSet.frameSequence )
-				currentTextureArray.push(AssetManager.mainAssetPack.getTexture(_textureArray[frameNumber]));
+				currentTextureArray.push(_assetPack.getTexture(_textureArray[frameNumber]));
 				
 			var newFlipBook : Flipbook = new Flipbook(animationSet.animationName, currentTextureArray);
 			newFlipBook.setDuration( animationSet.frameSequence.length * animationSet.animationSpeed / ANIMATION_SPEED_DIVIDER);
