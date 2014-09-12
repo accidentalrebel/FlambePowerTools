@@ -15,7 +15,22 @@ class Button extends ImageSprite
 	static private inline var ON_PRESS_SCALE_TARGET : Float = 0.90;
 	
 	var _onPressedAnimationScript:Script;
+	var _isEnabled:Bool = true;
 	
+	// ============================================= PUBLIC ============================================= //
+	public function enable()
+	{
+		this.alpha._ = 1;
+		_isEnabled = true;
+	}
+	
+	public function disable() 
+	{
+		this.alpha._ = 0.5;
+		_isEnabled = false;
+	}
+	
+	// ============================================= MAIN ============================================= //
 	public function new(?texturePath : String) 
 	{
 		super(Registry.assetPack.getTexture(texturePath));		
@@ -39,6 +54,9 @@ class Button extends ImageSprite
 	// ============================================= EVENTS ============================================= //
 	function onPressedDown(pointerEvent : PointerEvent) 
 	{
+		if ( !_isEnabled )
+			return;
+			
 		playOnPressedAnimation();
 	}
 	
