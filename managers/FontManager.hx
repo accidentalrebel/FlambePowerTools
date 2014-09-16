@@ -1,6 +1,6 @@
 package flambepowertools.managers;
-import flambe.asset.AssetPack;
-import flambe.display.Font;
+import kit.asset.AssetPack;
+import kit.display.Font;
 
 class FontManager
 {

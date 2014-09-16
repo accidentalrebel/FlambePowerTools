@@ -1,7 +1,7 @@
 package flambepowertools.swf;
-import flambe.swf.Library;
+import kit.movie.Library;
 
-class MoviePlayer extends flambe.swf.MoviePlayer
+class MoviePlayer extends kit.movie.MoviePlayer
 {
 	var _sequenceArray:Array<String>;
 	var _sequenceIndex:Int = 0;

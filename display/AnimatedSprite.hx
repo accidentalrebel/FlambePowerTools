@@ -1,11 +1,11 @@
 package flambepowertools.display;
-import flambe.asset.AssetPack;
-import flambe.display.Sprite;
-import flambe.display.Texture;
-import flambe.Entity;
-import flambe.SpeedAdjuster;
-import flambe.swf.Flipbook;
-import flambe.swf.Library;
+import kit.asset.AssetPack;
+import kit.display.Sprite;
+import kit.display.Texture;
+import kit.Entity;
+import kit.SpeedAdjuster;
+import kit.movie.Flipbook;
+import kit.movie.Library;
 import flambepowertools.display.AnimatedSprite.AnimationSet;
 import flambepowertools.swf.MoviePlayer;
 
