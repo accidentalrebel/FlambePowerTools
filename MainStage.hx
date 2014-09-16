@@ -4,10 +4,10 @@
 // http://www.accidentalrebel.com
 
 package flambepowertools;
-import flambe.display.Sprite;
-import flambe.math.Point;
-import flambe.math.Rectangle;
-import flambe.System;
+import kit.display.Sprite;
+import kit.math.Point;
+import kit.math.Rectangle;
+import kit.System;
 
 class MainStage
 {	

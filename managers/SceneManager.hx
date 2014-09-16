@@ -1,8 +1,8 @@
 package flambepowertools.managers;
-import flambe.Entity;
-import flambe.scene.Director;
-import flambe.scene.Scene;
-import flambe.System;
+import kit.Entity;
+import kit.scene.Director;
+import kit.scene.Scene;
+import kit.System;
 
 /**
  * ...
@@ -23,15 +23,15 @@ class SceneManager
 		var newEntity : Entity = new Entity();
 		newEntity.add(toScene);
 		
-		_sceneDirector.unwindToScene(newEntity);
+		_sceneDirector.legacyUnwindToScene(newEntity);
 	}
 	
-	static public function pushScene(toScene : Scene)
+	static public function legacyPushScene(toScene : Scene)
 	{
 		var newEntity : Entity = new Entity();
 		newEntity.add(toScene);
 		
-		_sceneDirector.pushScene(newEntity);
+		_sceneDirector.legacyPushScene(newEntity);
 	}
 	
 	static public function popScene() 

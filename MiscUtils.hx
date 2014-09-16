@@ -1,12 +1,12 @@
 package flambepowertools ;
-import flambe.display.Sprite;
-import flambe.Entity;
-import flambe.math.Matrix;
-import flambe.math.Point;
-import flambe.script.CallFunction;
-import flambe.script.Delay;
-import flambe.script.Script;
-import flambe.script.Sequence;
+import kit.display.Sprite;
+import kit.Entity;
+import kit.math.Matrix;
+import kit.math.Point;
+import kit.script.CallFunction;
+import kit.script.Delay;
+import kit.script.Script;
+import kit.script.Sequence;
 import flambepowertools.MainStage;
 
 /**

@@ -1,12 +1,12 @@
 package flambepowertools.input;
-import flambe.Component;
-import flambe.display.FillSprite;
-import flambe.Disposer;
-import flambe.Entity;
-import flambe.input.PointerEvent;
-import flambe.math.Point;
-import flambe.System;
-import flambe.util.Signal0;
+import kit.Component;
+import kit.display.FillSprite;
+import kit.Disposer;
+import kit.Entity;
+import kit.input.PointerEvent;
+import kit.math.Point;
+import kit.System;
+import kit.util.Signal0;
 import game.data.DebugConfig;
 import game.data.GameData;
 
