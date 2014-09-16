@@ -26,7 +26,7 @@ class SceneManager
 		_sceneDirector.legacyUnwindToScene(newEntity);
 	}
 	
-	static public function legacyPushScene(toScene : Scene)
+	static public function pushScene(toScene : Scene)
 	{
 		var newEntity : Entity = new Entity();
 		newEntity.add(toScene);
