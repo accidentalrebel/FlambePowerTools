@@ -1,6 +1,7 @@
 package flambepowertools.managers;
 import kit.sound.Playback;
 import game.Registry;
+import kit.System;
 
 /**
  * ...
@@ -8,8 +9,12 @@ import game.Registry;
  */
 class AudioManager
 {
+	static public var isAudioOn(get, null) : Bool;
+	static private var _isAudioOn : Bool = true;
+	
 	static var _playbackMap : Map<String, Playback>;
 	
+	// ============================================= PUBLIC ============================================= //
 	static public function setup()
 	{
 		_playbackMap = new Map<String, Playback>();
@@ -46,5 +51,40 @@ class AudioManager
 			playback.dispose();
 			_playbackMap.remove(audioPath);			
 		}
+	}
+	
+	static public function muteAudio()
+	{
+		_isAudioOn = false;
+		updateAudioStatus();
+	}
+	
+	static public function unmuteAudio()
+	{
+		_isAudioOn = true;
+		updateAudioStatus();
+	}
+	
+	static public function toggleAudioStatus()
+	{
+		if ( _isAudioOn )
+			muteAudio();
+		else
+			unmuteAudio();
+	}
+
+	// ============================================= HELPERS ============================================= //
+	static private function updateAudioStatus() 
+	{
+		if ( _isAudioOn )
+			System.volume._ = 1;
+		else
+			System.volume._ = 0;
+	}
+	
+	// ============================================= GETTERS AND SETTERS ============================================= //
+	static function get_isAudioOn():Bool 
+	{
+		return _isAudioOn;
 	}
 }
