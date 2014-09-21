@@ -1,4 +1,4 @@
-package flambepowertools ;
+package flambepowertools.utils ;
 import kit.display.Sprite;
 import kit.Entity;
 import kit.math.Matrix;

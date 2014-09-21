@@ -1,9 +1,10 @@
 package flambepowertools.ui;
+import flambepowertools.utils.MiscUtils;
+import game.Registry;
 import kit.display.ImageSprite;
 import kit.input.PointerEvent;
 import kit.script.CallFunction;
 import kit.script.Script;
-import game.Registry;
 
 /**
  * ...
