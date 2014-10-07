@@ -15,11 +15,6 @@ import flambepowertools.MainStage;
  */
 class MiscUtils
 {	
-	/**
-	 * Calls the given function after a given delay duration
-	 * @param	functionToCallAfterDelay
-	 * @param	delayDuration
-	 */
 	public static function callWithDelay(callerEntity : Entity, functionToCallAfterDelay:CallFunction, delayDuration : Float = 1) : Script
 	{				
 		var toAddEntity : Entity = new Entity();
@@ -37,12 +32,7 @@ class MiscUtils
 		return callDelayScriptToUse;
 	}	
 	
-	/**
-	 * Gets the global coordinates of the given sprite
-	 * @param	theSprite	the sprite to get the global coordinates from
-	 * @return	The global 	x and y coordinates of the sprite
-	 */
-	static public function getGlobalCoordinates( theSprite : Sprite ) : Point
+	static public function getGlobalCoordinatesOfSprite( theSprite : Sprite ) : Point
 	{
 		var matrix : Matrix = theSprite.getViewMatrix();
 		return new Point(matrix.m02, matrix.m12);
