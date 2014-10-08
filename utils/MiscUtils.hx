@@ -1,4 +1,5 @@
 package flambepowertools.utils ;
+import game.characters.Character;
 import kit.display.Sprite;
 import kit.Entity;
 import kit.math.Matrix;
@@ -36,5 +37,15 @@ class MiscUtils
 	{
 		var matrix : Matrix = theSprite.getViewMatrix();
 		return new Point(matrix.m02, matrix.m12);
+	}
+	
+	static public function deepCopyArray<A>(arrayToCopy : Array<A>) : Array<A>
+	{
+		var newArray : Array<A> = new Array<A>();
+		for ( element in arrayToCopy ) {
+			newArray.push(element);
+		}
+		
+		return newArray;
 	}
 }
