@@ -81,4 +81,11 @@ class Button extends ImageSprite
 		this.scaleX.animateTo(1, ON_PRESS_ANIMATION_SPEED);
 		this.scaleY.animateTo(1, ON_PRESS_ANIMATION_SPEED);
 	}
+	
+	// ============================================= DIPOSAL ============================================= //
+	override public function dispose() 
+	{
+		super.dispose();
+		_onPressedAnimationScript = null;
+	}
 }

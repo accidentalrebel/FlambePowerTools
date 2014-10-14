@@ -64,4 +64,22 @@ class SwipeManager extends Component
 	function get_onSwipeRight():Signal0 { return _onSwipeRight; }
 	function get_onSwipeDown():Signal0 { return _onSwipeDown; }
 	function get_onSwipeLeft():Signal0 { return _onSwipeLeft; }
+	
+	// ============================================= DISPOSAL ============================================= //
+	override public function dispose() 
+	{
+		super.dispose();
+		
+		onSwipeUp = null;
+		onSwipeRight = null;
+		onSwipeDown = null;
+		onSwipeLeft = null;
+		
+		_onSwipeUp = null;
+		_onSwipeRight = null;
+		_onSwipeDown = null;
+		_onSwipeLeft = null;
+		
+		_pointerDownPos = null;
+	}
 }

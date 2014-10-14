@@ -110,4 +110,16 @@ class AnimatedSprite extends Sprite
 		if ( currentFrameCount > _highestFrameCount )
 			_highestFrameCount = currentFrameCount;
 	}
+	
+	// ============================================= DISPOSAL ============================================= //
+	override public function dispose() 
+	{
+		super.dispose();
+		
+		_animationList = null;
+		_flipBookArray = null;
+		_textureArray = null;
+		_moviePlayer = null;
+		_assetPack = null;
+	}
 }

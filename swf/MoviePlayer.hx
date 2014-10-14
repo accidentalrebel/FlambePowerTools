@@ -6,11 +6,7 @@ class MoviePlayer extends kit.movie.MoviePlayer
 	var _sequenceArray:Array<String>;
 	var _sequenceIndex:Int = 0;
 	
-	public function new(lib : Library) 
-	{
-		super(lib);
-	}
-	
+	// ============================================= PUBLIC ============================================= //
 	public function playSequence(sequenceArray : Array<String>, restart : Bool = true) : MoviePlayer
 	{
 		_sequenceArray = sequenceArray;
@@ -19,6 +15,12 @@ class MoviePlayer extends kit.movie.MoviePlayer
 		return this;
 	}
 	
+	// ============================================= MAIN ============================================= //
+	public function new(lib : Library) 
+	{
+		super(lib);
+	}
+		
 	override public function onUpdate(dt:Float) 
 	{
 		// If this update would end the oneshot movie, replace it with the looping movie
@@ -33,4 +35,10 @@ class MoviePlayer extends kit.movie.MoviePlayer
         }
 	}
 	
+	// ============================================= DISPOSAL ============================================= //
+	override public function dispose() 
+	{
+		super.dispose();		
+		_sequenceArray = null;
+	}
 }
