@@ -43,7 +43,7 @@ class MainStage
 	static private function setupMainStageSprite() 
 	{
 		_mainStageSprite = new Sprite();
-		_mainStageSprite.scissor = new Rectangle(0, 0, _designSizeWidth, _designSizeHeight);
+		//_mainStageSprite.scissor = new Rectangle(0, 0, _designSizeWidth, _designSizeHeight);
 		System.root.add(_mainStageSprite);
 	}
 
