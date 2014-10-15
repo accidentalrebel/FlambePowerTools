@@ -40,7 +40,8 @@ class MainStage
 	{
 		var xPos : Float = (positionToConvert.x - _mainStageSprite.x._) / _computedStageScale;
 		var yPos : Float = (positionToConvert.y - _mainStageSprite.y._) / _computedStageScale;
-		return capPositionToMainStage(new Point(xPos, yPos));
+		//return capPositionToMainStage(new Point(xPos, yPos));
+		return new Point(xPos, yPos);
 	}
 
 	// ============================================= SETUP ============================================= //
