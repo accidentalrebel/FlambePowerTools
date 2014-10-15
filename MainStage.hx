@@ -40,7 +40,6 @@ class MainStage
 	{
 		var xPos : Float = (positionToConvert.x - _mainStageSprite.x._) / _computedStageScale;
 		var yPos : Float = (positionToConvert.y - _mainStageSprite.y._) / _computedStageScale;
-		//return capPositionToMainStage(new Point(xPos, yPos));
 		return new Point(xPos, yPos);
 	}
 
@@ -48,7 +47,6 @@ class MainStage
 	static private function setupMainStageSprite() 
 	{
 		_mainStageSprite = new Sprite();
-		//_mainStageSprite.scissor = new Rectangle(0, 0, _designSizeWidth, _designSizeHeight);
 		System.root.add(_mainStageSprite);
 	}
 
@@ -108,21 +106,6 @@ class MainStage
 
 		_mainStageSprite.x._ = xDiff / 2 + (_designSizeWidth * _computedStageScale) / 2;
 		_mainStageSprite.y._ = yDiff / 2 + (_designSizeHeight * _computedStageScale) / 2;
-	}
-
-	static private function capPositionToMainStage(position:Point) 
-	{
-		if ( position.x < 0 )
-			position.x = 0;
-		else if ( position.x > MainStage.stageWidth )
-			position.x = MainStage.stageWidth;
-
-		if ( position.y < 0 )
-			position.y = 0;
-		else if ( position.y > MainStage.stageHeight )
-			position.y = MainStage.stageHeight;
-
-		return position;
 	}
 
 	// ============================================= GETTERS AND SETTERS ============================================= //
