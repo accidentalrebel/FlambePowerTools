@@ -12,13 +12,17 @@ import kit.System;
 class MainStage
 {	
 	static public var computedStageScale(get, null) : Float;	
-	static public var width(get, null) : Float;
-	static public var height(get, null) : Float;
+	static public var stageWidth(get, null) : Float;
+	static public var stageHeight(get, null) : Float;
+	static public var screenWidth(get, null) : Float;
+	static public var screenHeight(get, null) : Float;
 	static public var mainStageSprite(get, null) : Sprite;
 
 	static private var _mainStageSprite:Sprite;
 	static private var _designSizeWidth:Float;
-	static private var _designSizeHeight:Float;
+	static private var _designSizeHeight:Float;	
+	static private var _screenWidth:Float;
+	static private var _screenHeight:Float;
 	static private var _computedStageScale:Float;
 
 	static public function init(designSizeWidth : Float, designSizeHeight : Float) 
@@ -60,8 +64,10 @@ class MainStage
 
 	// ============================================= HELPER FUNCTIONS ============================================= //
 	static function resizeStage() 
-	{		
-		_computedStageScale = computeScaleAccordingToNewStageDimensions();     	
+	{	
+		_computedStageScale = computeScaleAccordingToNewStageDimensions();
+		_screenWidth = getScreenWidth();
+		_screenHeight = getScreenHeight();
 		_mainStageSprite.setScale(_computedStageScale);
 
 		centerStage();
@@ -83,6 +89,16 @@ class MainStage
 
 		return computedScale;
 	}
+	
+	static private function getScreenHeight() : Float
+	{
+		return System.stage.height / _computedStageScale;
+	}
+	
+	static private function getScreenWidth() : Float
+	{
+		return System.stage.width / _computedStageScale;
+	}
 
 	static function centerStage() 
 	{
@@ -97,20 +113,22 @@ class MainStage
 	{
 		if ( position.x < 0 )
 			position.x = 0;
-		else if ( position.x > MainStage.width )
-			position.x = MainStage.width;
+		else if ( position.x > MainStage.stageWidth )
+			position.x = MainStage.stageWidth;
 
 		if ( position.y < 0 )
 			position.y = 0;
-		else if ( position.y > MainStage.height )
-			position.y = MainStage.height;
+		else if ( position.y > MainStage.stageHeight )
+			position.y = MainStage.stageHeight;
 
 		return position;
 	}
 
 	// ============================================= GETTERS AND SETTERS ============================================= //
 	static function get_computedStageScale():Float { return _computedStageScale; }
-	static function get_width():Float { return _designSizeWidth; }
-	static function get_height():Float { return _designSizeHeight; }
+	static function get_stageWidth():Float { return _designSizeWidth; }
+	static function get_stageHeight():Float { return _designSizeHeight; }
+	static function get_screenWidth():Float { return _screenWidth; }
+	static function get_screenHeight():Float { return _screenHeight; }
 	static function get_mainStageSprite():Sprite {	return _mainStageSprite; }
 }
