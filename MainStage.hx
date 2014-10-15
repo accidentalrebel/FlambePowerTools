@@ -105,8 +105,8 @@ class MainStage
 		var xDiff:Float = System.stage.width - (_designSizeWidth * _computedStageScale);
 		var yDiff:Float = System.stage.height - (_designSizeHeight * _computedStageScale);
 
-		_mainStageSprite.x._ = xDiff / 2;
-		_mainStageSprite.y._ = yDiff / 2;
+		_mainStageSprite.x._ = xDiff / 2 + (_designSizeWidth * _computedStageScale) / 2;
+		_mainStageSprite.y._ = yDiff / 2 + (_designSizeHeight * _computedStageScale) / 2;
 	}
 
 	static private function capPositionToMainStage(position:Point) 
